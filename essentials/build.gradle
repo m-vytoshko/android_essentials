@@ -4,6 +4,9 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.m-vytoshko'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -12,15 +15,12 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
-
-        consumerProguardFiles "consumer-rules.pro"
+        versionName "1.02"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
