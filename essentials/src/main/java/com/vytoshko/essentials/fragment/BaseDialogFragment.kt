@@ -16,18 +16,25 @@ abstract class BaseDialogFragment<BindingType : ViewDataBinding, Vm : BaseVm> : 
     IFragment {
 
     protected abstract val vm: Vm
-    protected lateinit var binding: BindingType
+
+    private var _binding: BindingType? = null
+    protected val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        _binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         binding.lifecycleOwner = this
         binding.setVariable(BR.viewModel, vm)
         vm.interaction.observe(viewLifecycleOwner, interactionHandler)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     protected open fun handleInteraction(interaction: Interaction?) {}
