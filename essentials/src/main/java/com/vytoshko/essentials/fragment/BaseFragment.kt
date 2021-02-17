@@ -15,7 +15,7 @@ import com.vytoshko.essentials.viewmodel.Interaction
 abstract class BaseFragment<BindingType : ViewDataBinding, Vm : BaseVm> : Fragment(), IFragment {
     protected abstract val vm: Vm
 
-    private var _binding: BindingType? = null
+    protected var _binding: BindingType? = null
     protected val binding get() = _binding!!
 
     override fun onCreateView(
